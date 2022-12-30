@@ -1,0 +1,20 @@
+body{
+  background-size: cover;
+  background-position: center;
+}
+a{
+  font-size: 20px !important;
+  background-color: aqua;
+  margin-top: 30px;
+  width: 40%;
+  border-radius: 20px !important;
+  color: red;
+}
+h1{
+  width: 100%;
+  margin: 0;
+  font-size: 30px !important;
+}
+#back{
+  margin: 10px;
+}
