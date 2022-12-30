@@ -18,7 +18,7 @@
                           <center>
                                 <h3 id="status" class="btn btn-warning"></h3>
                                 <br><br>
-                                <h3 class="btn btn-primary">There are 5 big objects in the image from which cocossd model has detected _______ objects</h3>
+                                <h3 class="btn btn-primary" id="Status">There are 5 big objects in the image from which cocossd model has detected _______ objects</h3>
                           </center>
                     </body>
                     <script>
@@ -32,14 +32,14 @@
                               canvas = createCanvas(400, 350);
                              canvas.position(500, 300);
 
-                             objectDector = ml5.objectDetector("cocossd", modelLoaded);
+                             objectdetector = ml5.objectDetector("cocossd", modelLoaded);
                              document.getElementById("status").innerHTML = "status: detecting objects";
                             
                         }
                         function modelLoaded(){
                           console.log("model is loaded");
                           status = true;
-                          objectDector.detect(img, gotResults);
+                          objectdetector.detect(img, gotResults);
                         }
                         function gotResults(error, results)
                         {
@@ -51,6 +51,19 @@
                         }
                         function draw(){
                               image(img, 0, 0, 400, 400);
+                              if(status != ""){
+                              objectdetector.detect(img, gotResults);
+                              for(i= 0; i < objects.length; i++){
+                                     document.getElementById("status").innerHTML = "status: objects Detected";
+                                     document.getElementById("Status").innerHTML= "There are 5 big objects in the image from which cocossd model has detected" + " "+ objects.length +" "+ "objects";
+                                     fill("purple");
+                                      percent = floor(objects[i].confidence * 100);
+                                     text(objects[i].label + " " + percent + "%", objects[i].x + 10, objects[i].y - 10);
+                                     noFill();
+                                     stroke("red");
+                                     rect(objects[i].x + 10, objects[i].y - 10, objects[i].width, objects[i].height);
+                                      }
+                              }
                         }
                         function back(){
                               window.location = "index.html";
